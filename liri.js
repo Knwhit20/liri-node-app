@@ -8,29 +8,52 @@
 
 //     * `do-what-it-says`
 
+
+
 require("dotenv").config();
 var keys = require("./keys.js");
 var axios = require("axios");
 var Spotify = require('node-spotify-api');
 var moment = require('moment');
 var fs = require("fs");
-// var spotify = new Spotify(keys.spotify);
+var spotify = new Spotify(keys.spotify);
+var userChoice = process.argv[2];
+var userInputs = process.argv[3];
 
-var artist = process.argv[2];
-var bandsqueryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+function showInfo (userChoice, userInputs){
+switch (userchoice) {
+    case "concert-this":
+        showConcertInfo(userInputs);
+        break;
+    case  "spotify-this-song":
+        showSpotifyInfo(userInputs);
+        break;
+    case "movie-this":
+        showMovieInfo(userInputs);
+        break;
+    case "do-what-it-says":
+        showwhatitsays(userInputs);
+        break;
+
+}}
+
+showInfo(userChoice, userInputs);
+
+// var artist = userInputs;
+// var bandsqueryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
 
 
-axios.get(bandsqueryUrl).then(
-    function(response) {
-        if (err) {
-            console.log("error");
-            return;
-        }
-        console.log(response.data);
-        console.log("Venue name: " + response.data.venue.name);
-        console.log("Venue location: " + response.data.venue.city);
-        console.log("Date of Event: " + response.data.venue.datetime);
-    })
+// axios.get(bandsqueryUrl).then(
+//     function(response) {
+//         if (err) {
+//             console.log("error");
+//             return;
+//         }
+//         console.log(response.data);
+//         console.log("Venue name: " + response.data.venue.name);
+//         console.log("Venue location: " + response.data.venue.city);
+//         console.log("Date of Event: " + response.data.venue.datetime);
+//     })
 
 
 
@@ -42,15 +65,15 @@ axios.get(bandsqueryUrl).then(
 //         console.log('Error occurred: ' + err);
 //         return;
 //     }
-
+//     console.log(data);
 // })
 
 
 
 
 // We then run the request with axios module on a URL with a JSON  (axios.get returns a promise)
-var movieName = process.argv.slice(2).join("+");
-var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
+var userInputs = process.argv.slice(2).join("+");
+var queryUrl = "http://www.omdbapi.com/?t=" + userInputs + "&y=&plot=short&apikey=trilogy";
 
 axios.get(queryUrl).then(
     function (response) {
