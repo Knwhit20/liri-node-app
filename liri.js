@@ -20,12 +20,12 @@ var spotify = new Spotify(keys.spotify);
 var userChoice = process.argv[2];
 var userInputs = process.argv[3];
 
-function showInfo (userChoice, userInputs){
-switch (userchoice) {
+
+switch (userChoice) {
     case "concert-this":
         showConcertInfo(userInputs);
         break;
-    case  "spotify-this-song":
+    case "spotify-this-song":
         showSpotifyInfo(userInputs);
         break;
     case "movie-this":
@@ -35,25 +35,24 @@ switch (userchoice) {
         showwhatitsays(userInputs);
         break;
 
-}}
-
-showInfo(userChoice, userInputs);
-
-// var artist = userInputs;
-// var bandsqueryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+}
 
 
-// axios.get(bandsqueryUrl).then(
-//     function(response) {
-//         if (err) {
-//             console.log("error");
-//             return;
-//         }
-//         console.log(response.data);
-//         console.log("Venue name: " + response.data.venue.name);
-//         console.log("Venue location: " + response.data.venue.city);
-//         console.log("Date of Event: " + response.data.venue.datetime);
-//     })
+
+var bandsqueryUrl = "https://rest.bandsintown.com/artists/" + userInputs + "/events?app_id=codingbootcamp";
+
+
+axios.get(bandsqueryUrl).then(
+    function(response) {
+        if (err) {
+            console.log("error");
+            return;
+        }
+        console.log(response.data);
+        console.log("Venue name: " + response.data.venue.name);
+        console.log("Venue location: " + response.data.venue.city);
+        console.log("Date of Event: " + response.data.venue.datetime);
+    })
 
 
 
@@ -72,15 +71,18 @@ showInfo(userChoice, userInputs);
 
 
 // We then run the request with axios module on a URL with a JSON  (axios.get returns a promise)
-var userInputs = process.argv.slice(2).join("+");
-var queryUrl = "http://www.omdbapi.com/?t=" + userInputs + "&y=&plot=short&apikey=trilogy";
+// var userInputs = process.argv.slice(2).join("+");
+function showMovieInfo(userInputs) {
+
+    var userInputs = process.argv.slice(3).join("+");
+    var queryUrl = "http://www.omdbapi.com/?t=" + userInputs + "&y=&plot=short&apikey=trilogy";
 
 axios.get(queryUrl).then(
     function (response) {
-        if (err) {
-            console.log("error");
-            return;
-        }
+        // if (err) {
+        //     console.log("error");
+        //     return;
+        // }
         // Then we print out the imdbRating
         console.log("Title: " + response.data.Title);
         console.log("The movie's rating is: " + response.data.imdbRating);
@@ -91,5 +93,6 @@ axios.get(queryUrl).then(
         console.log("Actors: " + response.data.Actors);
     }
 );
+}
 
     
