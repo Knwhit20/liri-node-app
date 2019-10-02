@@ -9,10 +9,10 @@ var moment = require('moment');
 moment().format();
 var spotify = new Spotify(keys.spotify);
 
-var fs = require("fs");
+
 
 var command = process.argv[2];
-var userInputs = process.argv[3];
+var userInputs = process.argv.slice(3).join("+");
 
 
 //switch commands 
@@ -40,21 +40,22 @@ userChoice(command, userInputs);
 
 //  Bands in town
 function showConcertInfo(userInputs) {
+
 var bandsqueryUrl = "https://rest.bandsintown.com/artists/" + userInputs + "/events?app_id=codingbootcamp";
 
-axios.get(bandsqueryUrl).then(
-    function (response, err) {
-        if (err) {
-            console.log("error");
-            return;
-        }
+axios.get(bandsqueryUrl).then(function (response) {
         console.log(response.data);
-        console.log("Venue name: " + response.data.venue.name);
-        console.log("Venue location: " + response.data.venue.city);
-        console.log("Date of Event: " + response.data.datetime);
-        datatime = moment().format();
+        console.log("Venue name: " + response.data[0].venue.name);
+        console.log("Venue location: " + response.data[0].venue.city);
+        console.log("Date of Event: " + response.data[0].datetime);
+        // datatime = moment().format();
     })
-}
+    .catch(
+        function(err) {
+            console.log("Error occurred: " + err);
+        }
+    )
+};
 
 
 
@@ -74,7 +75,7 @@ function showSpotifyInfo (userInputs) {
             console.log('Error occurred: ' + err);
             return;
         }
-        console.log(data.tracks.items[0]);
+        // console.log(data.tracks.items[0]);
         
         console.log(
             "Artist: " + data.tracks.items[0].album.artists[0].name + "\n",
@@ -118,16 +119,41 @@ function showMovieInfo(userInputs) {
         })
 };
 
-// node liri.js do -what - it - says`
-// function showwhatitsays(userInputs)
-// fs.readFile("random.txt", "utf-8", function (err, data) {
-//     if (err) {
-// console.log("error")
+
+// do-what-it-says
+var fs = require("fs");
+
+function showwhatitsays(userInputs){
+fs.readFile("random.txt", "utf-8", function (err, data) {
+    if (err) {
+console.log("error")
+    }
+    console.log(data);
+    var dataArr = data.split(", ");
+    if (dataArr.length === 2) {
+        pick(dataArr[0], dataArr[1]);
+    } else if (dataArr.length === 1) {
+        pick(dataArr[0]);
+    }
+    
+})
+}   
+// userChoice(command, userInputs);
+
+// Function for running a command based on text file
+
+
+// var doWhatItSays = function () {
+//     fs.readFile(“random.txt”, “utf8", function(error, data) {
+//    console.log(data);
+//     var dataArr = data.split(“, ”);
+//     if (dataArr.length === 2) {
+//         pick(dataArr[0], dataArr[1]);
+//     } else if (dataArr.length === 1) {
+//         pick(dataArr[0]);
 //     }
-//     userChoice()
-// })
-
-
+// });
+// };
 
 
     // * Using the`fs` Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
