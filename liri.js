@@ -3,6 +3,7 @@
 require("dotenv").config();
 var keys = require("./keys.js");
 var axios = require("axios");
+var fs = require("fs");
 
 var Spotify = require('node-spotify-api');
 var moment = require('moment');
@@ -28,7 +29,7 @@ function userChoice(command, userInputs) {
             showMovieInfo(userInputs);
             break;
         case "do-what-it-says":
-            showwhatitsays(userInputs);
+            showWhatItSays();
             break;
         default:
             console.log("Please choose a concert, song, or movie")
@@ -63,9 +64,9 @@ axios.get(bandsqueryUrl).then(function (response) {
 // node liri.js spotify-this-song '<song name here>'`
 
 function showSpotifyInfo (userInputs) {
-    var userInputs = process.argv.slice(3).join("+");
+    // var userInputs = process.argv.slice(3).join("+");
     //  If no song is provided then your program will default to "The Sign" by Ace of Base.
-    if (userInputs === '') {
+    if (userInputs === "") {
         userInputs = "The Sign Ace of Base"
     }
 
@@ -121,39 +122,34 @@ function showMovieInfo(userInputs) {
 
 
 // do-what-it-says
-var fs = require("fs");
 
-function showwhatitsays(userInputs){
-fs.readFile("random.txt", "utf-8", function (err, data) {
+
+function showWhatItSays(){
+
+fs.readFile("random.txt", "utf8", function (err, data) {
     if (err) {
-console.log("error")
+    console.log("Error occurred" + err);
     }
-    console.log(data);
-    var dataArr = data.split(", ");
+   //split the array
+    var dataArr = data.split(",");
+    console.log (dataArr);
+
     if (dataArr.length === 2) {
-        pick(dataArr[0], dataArr[1]);
-    } else if (dataArr.length === 1) {
-        pick(dataArr[0]);
+        userChoice(dataArr[0], dataArr[1]);
+        
+    } 
+    else if (dataArr.length === 1) {
+        userChoice(dataArr[0]);
     }
     
-})
+});
 }   
-// userChoice(command, userInputs);
-
-// Function for running a command based on text file
 
 
-// var doWhatItSays = function () {
-//     fs.readFile(“random.txt”, “utf8", function(error, data) {
-//    console.log(data);
-//     var dataArr = data.split(“, ”);
-//     if (dataArr.length === 2) {
-//         pick(dataArr[0], dataArr[1]);
-//     } else if (dataArr.length === 1) {
-//         pick(dataArr[0]);
-//     }
-// });
-// };
+
+
+
+
 
 
     // * Using the`fs` Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
@@ -165,9 +161,3 @@ console.log("error")
 
 
 
-// why is  error undefined
-// how do i log concert data?  "undefined"
-// movie-this princess bride shows  bandsintown data
-// movie-this does not default to mr nobody, "this is  loaded"
-// do what is says....
-// output the data to a.txt file called`log.txt`.
