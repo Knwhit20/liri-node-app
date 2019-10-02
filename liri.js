@@ -3,17 +3,20 @@
 require("dotenv").config();
 var keys = require("./keys.js");
 var axios = require("axios");
+
 var Spotify = require('node-spotify-api');
 var moment = require('moment');
 moment().format();
-var fs = require("fs");
 var spotify = new Spotify(keys.spotify);
+
+var fs = require("fs");
+
 var command = process.argv[2];
 var userInputs = process.argv[3];
 
 
-//switch commands
-function userchoice(command, userInputs) {
+//switch commands 
+function userChoice(command, userInputs) {
     switch (command) {
         case "concert-this":
             showConcertInfo(userInputs);
@@ -32,7 +35,11 @@ function userchoice(command, userInputs) {
 
     }
 }
-//  Bands in town 
+userChoice(command, userInputs);
+
+
+//  Bands in town
+function showConcertInfo(userInputs) {
 var bandsqueryUrl = "https://rest.bandsintown.com/artists/" + userInputs + "/events?app_id=codingbootcamp";
 
 axios.get(bandsqueryUrl).then(
@@ -47,13 +54,14 @@ axios.get(bandsqueryUrl).then(
         // console.log("Date of Event: " + response.data.datetime);
         // datatime = moment().format();
     })
+}
 
 
 
 
 // node liri.js spotify-this-song '<song name here>'`
 
-var spotifyThisSong = function (userInputs) {
+function showSpotifyInfo (userInputs) {
     var userInputs = process.argv.slice(3).join("+");
     //  If no song is provided then your program will default to "The Sign" by Ace of Base.
     if (userInputs === undefined) {
@@ -91,11 +99,11 @@ function showMovieInfo(userInputs) {
 
     axios.get(queryUrl).then(
         function (response) {
-            if (err) {
-                console.log("error");
-                return;
-            }
-            // console log data to 
+            // if (err) {
+            //     console.log("error");
+            //     return;
+            // }
+            
             // console.log(response.data);
             // Prints out movie info
             console.log("Title: " + response.data.Title);
@@ -109,9 +117,12 @@ function showMovieInfo(userInputs) {
 };
 
 // node liri.js do -what - it - says`
-fs.readFile("random.txt", "utf-8", function (err, data) {
+function showwhatitsays(userInputs)
+// fs.readFile("random.txt", "utf-8", function (err, data) {
+//     if (err) {
 
-})
+//     }
+// })
 
 
 
@@ -128,5 +139,6 @@ fs.readFile("random.txt", "utf-8", function (err, data) {
 // why is  error undefined
 // how do i log concert data?  "undefined"
 // movie-this princess bride shows  bandsintown data
-// movie-this does not default to mr nobody
+// movie-this does not default to mr nobody, "this is  loaded"
 // do what is says....
+// output the data to a.txt file called`log.txt`.
