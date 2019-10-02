@@ -43,16 +43,16 @@ function showConcertInfo(userInputs) {
 var bandsqueryUrl = "https://rest.bandsintown.com/artists/" + userInputs + "/events?app_id=codingbootcamp";
 
 axios.get(bandsqueryUrl).then(
-    function (response) {
-        // if (err) {
-        //     console.log("error");
-        //     return;
-        // }
+    function (response, err) {
+        if (err) {
+            console.log("error");
+            return;
+        }
         console.log(response.data);
-        // console.log("Venue name: " + response.data.venue.name);
-        // console.log("Venue location: " + response.data.venue.city);
-        // console.log("Date of Event: " + response.data.datetime);
-        // datatime = moment().format();
+        console.log("Venue name: " + response.data.venue.name);
+        console.log("Venue location: " + response.data.venue.city);
+        console.log("Date of Event: " + response.data.datetime);
+        datatime = moment().format();
     })
 }
 
@@ -64,22 +64,23 @@ axios.get(bandsqueryUrl).then(
 function showSpotifyInfo (userInputs) {
     var userInputs = process.argv.slice(3).join("+");
     //  If no song is provided then your program will default to "The Sign" by Ace of Base.
-    if (userInputs === undefined) {
-        userInputs = "The Sign by Ace of Base"
+    if (userInputs === '') {
+        userInputs = "The Sign Ace of Base"
     }
 
 
-    spotify.search({ type: "track", query: userInputs }, function (err, data) {
-        // if (err) {
-        //     console.log('Error occurred: ' + err);
-        //     return;
-        // }
-        console.log(data.track);
+    spotify.search({ type: "track", query: userInputs}, function (err, data) {
+        if (err) {
+            console.log('Error occurred: ' + err);
+            return;
+        }
+        console.log(data.tracks.items[0]);
+        
         console.log(
-            "Artist: " + data.track + "\n",
-            "Song: " + data.track + "\n",
-            "Preview: " + data.track + "\n",
-            "Album: " + data.track + "\n",
+            "Artist: " + data.tracks.items[0].album.artists[0].name + "\n",
+            "Song: " + data.tracks.items[0].name + "\n",
+            "Preview: " + data.tracks.items[0].album.external_urls.spotify + "\n",
+            "Album: " + data.tracks.items[0].album.name + "\n",
         )
     })
 }
@@ -90,21 +91,22 @@ function showSpotifyInfo (userInputs) {
 
 var userInputs = process.argv.slice(2).join("+");
 function showMovieInfo(userInputs) {
-    if (userInputs === undefined || null) {
+   
+    if (userInputs === "") {
         userInputs = "Mr. Nobody"
     };
-
+    console.log(userInputs);
     var userInputs = process.argv.slice(3).join("+");
     var queryUrl = "http://www.omdbapi.com/?t=" + userInputs + "&y=&plot=short&apikey=trilogy";
 
     axios.get(queryUrl).then(
-        function (response) {
-            // if (err) {
-            //     console.log("error");
-            //     return;
-            // }
+        function (response, err) {
+            if (err) {
+                console.log("error");
+                return;
+            }
             
-            // console.log(response.data);
+            // console.log(response);
             // Prints out movie info
             console.log("Title: " + response.data.Title);
             console.log("The movie's rating is: " + response.data.imdbRating);
@@ -117,11 +119,12 @@ function showMovieInfo(userInputs) {
 };
 
 // node liri.js do -what - it - says`
-function showwhatitsays(userInputs)
+// function showwhatitsays(userInputs)
 // fs.readFile("random.txt", "utf-8", function (err, data) {
 //     if (err) {
-
+// console.log("error")
 //     }
+//     userChoice()
 // })
 
 
