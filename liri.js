@@ -7,7 +7,7 @@ var fs = require("fs");
 
 var Spotify = require('node-spotify-api');
 var moment = require('moment');
-moment().format();
+moment().format("MMM Do YY");
 var spotify = new Spotify(keys.spotify);
 
 
@@ -48,8 +48,9 @@ axios.get(bandsqueryUrl).then(function (response) {
         console.log(response.data);
         console.log("Venue name: " + response.data[0].venue.name);
         console.log("Venue location: " + response.data[0].venue.city);
-        console.log("Date of Event: " + response.data[0].datetime);
-        // datatime = moment().format();
+    var time = moment(response.data[0].datetime).format("MMM Do YY, h:mm:ss a");
+        console.log("Date of Event: " + time);
+           
     })
     .catch(
         function(err) {
