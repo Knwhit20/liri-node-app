@@ -39,13 +39,13 @@ function userChoice(command, userInputs) {
 userChoice(command, userInputs);
 
 
-//  Bands in town
+//  Bands in town function
 function showConcertInfo(userInputs) {
 
     var bandsqueryUrl = "https://rest.bandsintown.com/artists/" + userInputs + "/events?app_id=codingbootcamp";
-
+    //axios call to bands in town API
     axios.get(bandsqueryUrl).then(function (response) {
-        // console.log(response.data);
+        // print specific info to the console
         console.log("Venue name: " + response.data[0].venue.name);
         console.log("Venue location: " + response.data[0].venue.city);
         var time = moment(response.data[0].datetime).format("MMM Do YY, h:mm:ss a");
@@ -70,14 +70,14 @@ function showSpotifyInfo(userInputs) {
         userInputs = "The Sign Ace of Base"
     }
 
-
+    //search spotify-node API for artist/music input
     spotify.search({ type: "track", query: userInputs }, function (err, data) {
         if (err) {
             console.log('Error occurred: ' + err);
             return;
         }
         // console.log(data.tracks.items[0]); to gather data
-
+        //printing spotify info to the console
         console.log(
             "Artist: " + data.tracks.items[0].album.artists[0].name + "\n",
             "Song: " + data.tracks.items[0].name + "\n",
@@ -93,13 +93,13 @@ function showSpotifyInfo(userInputs) {
 
 
 function showMovieInfo(userInputs) {
-
+    //if no userinput given for movie info, defaults to movie Mr. Nobody 
     if (userInputs === "") {
         userInputs = "Mr. Nobody"
     };
     console.log(userInputs);
     var queryUrl = "http://www.omdbapi.com/?t=" + userInputs + "&y=&plot=short&apikey=trilogy";
-
+    //axios call to OMDB for movie info
     axios.get(queryUrl).then(
         function (response, err) {
             if (err) {
