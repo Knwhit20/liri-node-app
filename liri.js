@@ -42,21 +42,21 @@ userChoice(command, userInputs);
 //  Bands in town
 function showConcertInfo(userInputs) {
 
-var bandsqueryUrl = "https://rest.bandsintown.com/artists/" + userInputs + "/events?app_id=codingbootcamp";
+    var bandsqueryUrl = "https://rest.bandsintown.com/artists/" + userInputs + "/events?app_id=codingbootcamp";
 
-axios.get(bandsqueryUrl).then(function (response) {
-        console.log(response.data);
+    axios.get(bandsqueryUrl).then(function (response) {
+        // console.log(response.data);
         console.log("Venue name: " + response.data[0].venue.name);
         console.log("Venue location: " + response.data[0].venue.city);
-    var time = moment(response.data[0].datetime).format("MMM Do YY, h:mm:ss a");
+        var time = moment(response.data[0].datetime).format("MMM Do YY, h:mm:ss a");
         console.log("Date of Event: " + time);
-           
+
     })
-    .catch(
-        function(err) {
-            console.log("Error occurred: " + err);
-        }
-    )
+        .catch(
+            function (err) {
+                console.log("Error occurred: " + err);
+            }
+        )
 };
 
 
@@ -64,7 +64,7 @@ axios.get(bandsqueryUrl).then(function (response) {
 
 // node liri.js spotify-this-song '<song name here>'`
 
-function showSpotifyInfo (userInputs) {
+function showSpotifyInfo(userInputs) {
     // var userInputs = process.argv.slice(3).join("+");
     //  If no song is provided then your program will default to "The Sign" by Ace of Base.
     if (userInputs === "") {
@@ -72,13 +72,13 @@ function showSpotifyInfo (userInputs) {
     }
 
 
-    spotify.search({ type: "track", query: userInputs}, function (err, data) {
+    spotify.search({ type: "track", query: userInputs }, function (err, data) {
         if (err) {
             console.log('Error occurred: ' + err);
             return;
         }
-        // console.log(data.tracks.items[0]);
-        
+        // console.log(data.tracks.items[0]); to gather data
+
         console.log(
             "Artist: " + data.tracks.items[0].album.artists[0].name + "\n",
             "Song: " + data.tracks.items[0].name + "\n",
@@ -90,11 +90,11 @@ function showSpotifyInfo (userInputs) {
 
 
 
-    // `node liri.js movie-this '<movie name here>'`
+// `node liri.js movie-this '<movie name here>'`
 
 var userInputs = process.argv.slice(2).join("+");
 function showMovieInfo(userInputs) {
-   
+
     if (userInputs === "") {
         userInputs = "Mr. Nobody"
     };
@@ -108,7 +108,7 @@ function showMovieInfo(userInputs) {
                 console.log("error");
                 return;
             }
-            
+
             // console.log(response);
             // Prints out movie info
             console.log("Title: " + response.data.Title);
@@ -125,39 +125,37 @@ function showMovieInfo(userInputs) {
 // do-what-it-says
 
 
-function showWhatItSays(){
+function showWhatItSays() {
+// * Using the`fs` Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
+    fs.readFile("random.txt", "utf8", function (err, data) {
+        if (err) {
+            console.log("Error occurred" + err);
+        }
+        //split the array at ","
+        var dataArr = data.split(",");
+        console.log(dataArr);
+        //
+        if (dataArr.length === 2) {
+            userChoice(dataArr[0], dataArr[1]);
 
-fs.readFile("random.txt", "utf8", function (err, data) {
-    if (err) {
-    console.log("Error occurred" + err);
-    }
-   //split the array
-    var dataArr = data.split(",");
-    console.log (dataArr);
+        }
+        else if (dataArr.length === 1) {
+            userChoice(dataArr[0]);
+        }
 
-    if (dataArr.length === 2) {
-        userChoice(dataArr[0], dataArr[1]);
-        
-    } 
-    else if (dataArr.length === 1) {
-        userChoice(dataArr[0]);
-    }
+    });
+}
+
+
+
+
+
+
+
+
     
-});
-}   
 
-
-
-
-
-
-
-
-    // * Using the`fs` Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
-
-    //     * It should run`spotify-this-song` for "I Want it That Way," as follows the text in `random.txt`.
-
-    //  * Edit the text in random.txt to test out the feature for movie - this and concert - this.
+   
 
 
 
