@@ -6,6 +6,7 @@ Purpose: LIRI is a _Language_ Interpretation and Recognition Interface.  LIRI is
 
 Organization:
 Use Node to run this program. Type node liri.js followed by a command listed below, then add search information
+
 ![Image of command switch statements](images/Switch_commands.png)
 
    * `concert-this`
@@ -26,6 +27,7 @@ For concert-this, you will be  provided with:
  1.  Name of venue
  2.  Venue location
  3.  Date of Event
+
  ![Image of concert-this](images/bandsintown.png)
 
  For spotify-this-song, you will be provided with:
@@ -33,6 +35,7 @@ For concert-this, you will be  provided with:
  2. A preview link of the song from Spotify
  3. The album the song is from
  4. If no song is provided then the program will default to "The Sign" by Ace of Base
+
  ![Image of spotify-this-song](images/spotify_this_song.png)
 
  For movie-this, you will be provided with:
@@ -43,10 +46,12 @@ For concert-this, you will be  provided with:
  5. Language of the movie
  6. Plot of the movie
  7.  Actors in the movie
+
  ![Image of movie-this](images/movie-this.png)
  
  For do-what-it-says, you will be provided with:
  The random.txt file will search for spotify-this-song "I Want it That Way".  You will be provided with the spotify results as listed above.
+ 
  ![Image of do-what-it-says](images/do_what_it_says.png)
 
 Technologies used:
