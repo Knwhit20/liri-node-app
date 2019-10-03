@@ -51,15 +51,15 @@ For concert-this, you will be  provided with:
  
  For do-what-it-says, you will be provided with:
  The random.txt file will search for spotify-this-song "I Want it That Way".  You will be provided with the spotify results as listed above.
- 
+
  ![Image of do-what-it-says](images/do_what_it_says.png)
 
-Technologies used:
-Javascript
-Node.js
-Bands in Town API
-OMDB API
-Spotify-node-API
+*Technologies used:
+*Javascript
+*Node.js
+*Bands in Town API
+*OMDB API
+*Spotify-node-API
 
 
 
