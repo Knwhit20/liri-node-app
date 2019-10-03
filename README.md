@@ -54,12 +54,12 @@ For concert-this, you will be  provided with:
 
  ![Image of do-what-it-says](images/do_what_it_says.png)
 
-*Technologies used:
-*Javascript
-*Node.js
-*Bands in Town API
-*OMDB API
-*Spotify-node-API
+Technologies used:
+* Javascript
+* Node.js
+* Bands in Town API
+* OMDB API
+* Spotify-node-API
 
 
 
