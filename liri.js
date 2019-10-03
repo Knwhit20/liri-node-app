@@ -65,7 +65,6 @@ function showConcertInfo(userInputs) {
 // node liri.js spotify-this-song '<song name here>'`
 
 function showSpotifyInfo(userInputs) {
-    // var userInputs = process.argv.slice(3).join("+");
     //  If no song is provided then your program will default to "The Sign" by Ace of Base.
     if (userInputs === "") {
         userInputs = "The Sign Ace of Base"
@@ -92,14 +91,13 @@ function showSpotifyInfo(userInputs) {
 
 // `node liri.js movie-this '<movie name here>'`
 
-var userInputs = process.argv.slice(2).join("+");
+
 function showMovieInfo(userInputs) {
 
     if (userInputs === "") {
         userInputs = "Mr. Nobody"
     };
     console.log(userInputs);
-    var userInputs = process.argv.slice(3).join("+");
     var queryUrl = "http://www.omdbapi.com/?t=" + userInputs + "&y=&plot=short&apikey=trilogy";
 
     axios.get(queryUrl).then(
@@ -133,9 +131,10 @@ function showWhatItSays() {
         }
         //split the array at ","
         var dataArr = data.split(",");
-        console.log(dataArr);
+        console.log("dataArr", dataArr);
         //
         if (dataArr.length === 2) {
+            console.log("this one is running")
             userChoice(dataArr[0], dataArr[1]);
 
         }
