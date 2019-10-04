@@ -46,11 +46,12 @@ function showConcertInfo(userInputs) {
     //axios call to bands in town API
     axios.get(bandsqueryUrl).then(function (response) {
         // print specific info to the console
+         
         console.log("Venue name: " + response.data[0].venue.name);
         console.log("Venue location: " + response.data[0].venue.city);
         var time = moment(response.data[0].datetime).format("MMM Do YY, h:mm:ss a");
         console.log("Date of Event: " + time);
-
+        
     })
         .catch(
             function (err) {

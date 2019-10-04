@@ -45,7 +45,7 @@ For concert-this, you will be  provided with:
  4. Country where the movie was produced.
  5. Language of the movie
  6. Plot of the movie
- 7.  Actors in the movie
+ 7. Actors in the movie
 
  ![Image of movie-this](images/movie-this.png)
  
@@ -53,6 +53,10 @@ For concert-this, you will be  provided with:
  The random.txt file will search for spotify-this-song "I Want it That Way".  You will be provided with the spotify results as listed above.
 
  ![Image of do-what-it-says](images/do_what_it_says.png)
+
+For movie-this, if no userinput is provided, movie-this defaults to Mr. Nobody.  For spotify-this-song, if no song input is provided, the default is The Sign by Ace of Base.
+
+ ![Image of default movie-this and spotify-this-song](images/default.png)
 
 Technologies used:
 * Javascript
