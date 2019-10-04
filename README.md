@@ -16,9 +16,9 @@ Use Node to run this program. Type node liri.js followed by a command listed bel
    * `do-what-it-says`
 
 Examples of Searches:
-    * node liri.js movie-this the princess bride
-    * node liri.js spotify-this-song the dog days are over
-    * node liri.js concert-this florence and the machine
+* node liri.js movie-this the princess bride
+* node liri.js spotify-this-song the dog days are over
+* node liri.js concert-this florence and the machine
 
 
 For concert-this, you will be  provided with:
