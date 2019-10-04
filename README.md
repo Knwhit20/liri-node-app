@@ -1,7 +1,5 @@
 # liri-node-app
 
-Deployed at:
-
 Purpose: LIRI is a _Language_ Interpretation and Recognition Interface.  LIRI is a command line node app that takes in parameters and gives you back data.  For the purpose of this project, LIRI will be given inputs that will search Spotify for songs, Bands in Town for concerts, and OMDB for movies.
 
 Organization:
@@ -18,9 +16,9 @@ Use Node to run this program. Type node liri.js followed by a command listed bel
    * `do-what-it-says`
 
 Examples of Searches:
-    node liri.js movie-this the princess bride
-    node liri.js spotify-this-song the dog days are over
-    node liri.js concert-this florence and the machine
+    * node liri.js movie-this the princess bride
+    * node liri.js spotify-this-song the dog days are over
+    * node liri.js concert-this florence and the machine
 
 
 For concert-this, you will be  provided with:
